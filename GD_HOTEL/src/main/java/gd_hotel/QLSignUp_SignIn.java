@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 import com.hotel.database.DatabaseConnection;
+import com.hotel.database.DatabaseConnectionDangKy;
 
 /**
  *
@@ -29,7 +30,7 @@ public class QLSignUp_SignIn extends javax.swing.JFrame {
         
         String sql = "SELECT * FROM SaveTT";
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DangKy","root","311127");
+            Connection conn = DatabaseConnectionDangKy.getConnection();
             PreparedStatement st = conn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             DefaultTableModel model = (DefaultTableModel) tbShow.getModel();
@@ -37,6 +38,7 @@ public class QLSignUp_SignIn extends javax.swing.JFrame {
                 Object objList [] = {
                     rs.getString("sdt"),
                     rs.getString("mk"),
+                    rs.getString("userName")
                 };
                 
                 model.addRow(objList);
@@ -67,7 +69,7 @@ public class QLSignUp_SignIn extends javax.swing.JFrame {
 
             },
             new String [] {
-                "SĐT", "Password"
+                "SĐT", "Password", "UserName"
             }
         ));
         jScrollPane1.setViewportView(tbShow);

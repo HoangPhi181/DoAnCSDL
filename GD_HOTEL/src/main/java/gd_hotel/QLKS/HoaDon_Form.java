@@ -14,12 +14,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Date;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +37,7 @@ public class HoaDon_Form extends javax.swing.JFrame {
      */
     public HoaDon_Form() {
         initComponents();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         
         try (Connection conn = DatabaseConnection.getConnection()) {
             DefaultTableModel model = (DefaultTableModel) tbShowHD.getModel();
@@ -43,7 +46,7 @@ public class HoaDon_Form extends javax.swing.JFrame {
             for(HoaDon hd : HD){
                 model.addRow(new Object[] {
                     hd.getMaHD(),
-                    hd.getNgayLap(),
+                    sdf.format(hd.getNgayLap()),
                     hd.getMaNV(),
                     hd.getMaDP()
                 });
@@ -82,13 +85,10 @@ public class HoaDon_Form extends javax.swing.JFrame {
         btnUpdate1 = new javax.swing.JButton();
         btnDelete1 = new javax.swing.JButton();
         btnFind1 = new javax.swing.JButton();
-        btnAdd2 = new javax.swing.JButton();
-        btnUpdate2 = new javax.swing.JButton();
-        btnDelete2 = new javax.swing.JButton();
-        btnFind2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tbAddHD = new javax.swing.JTable();
+        tbAdd = new javax.swing.JTable();
+        btnChon = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,8 +115,14 @@ public class HoaDon_Form extends javax.swing.JFrame {
                 "Mã HĐ", "STT", "Nội Dung", "Số Lượng", "Đơn Giá"
             }
         ));
+        tbShowCTHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbShowCTHDMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbShowCTHD);
 
+        btnAdd1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48-free-object-icons/png/48x48/Add.png"))); // NOI18N
         btnAdd1.setText("Thêm");
         btnAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +130,7 @@ public class HoaDon_Form extends javax.swing.JFrame {
             }
         });
 
+        btnUpdate1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48-free-object-icons/png/48x48/edit-icon.png"))); // NOI18N
         btnUpdate1.setText("Sửa");
         btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +138,7 @@ public class HoaDon_Form extends javax.swing.JFrame {
             }
         });
 
+        btnDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48-free-object-icons/png/48x48/Minus.png"))); // NOI18N
         btnDelete1.setText("Xóa");
         btnDelete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +146,7 @@ public class HoaDon_Form extends javax.swing.JFrame {
             }
         });
 
+        btnFind1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48-free-object-icons/png/48x48/Search.png"))); // NOI18N
         btnFind1.setText("Tìm");
         btnFind1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,95 +154,106 @@ public class HoaDon_Form extends javax.swing.JFrame {
             }
         });
 
-        btnAdd2.setText("Thêm");
-
-        btnUpdate2.setText("Sửa");
-
-        btnDelete2.setText("Xóa");
-
-        btnFind2.setText("Tìm");
-
         jPanel1.setLayout(null);
 
-        tbAddHD.setModel(new javax.swing.table.DefaultTableModel(
+        tbAdd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
-                "Mã HĐ", "Ngày Lập", "Mã NV", "Mã DP"
+
             }
         ));
-        tbAddHD.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbAddHDMouseClicked(evt);
+                tbAddMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tbAddHD);
+        jScrollPane3.setViewportView(tbAdd);
+
+        btnChon.setText("Chọn");
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(btnChon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdd1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdate1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFind1)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(btnAdd2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUpdate2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFind2)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdd1)
+                .addGap(86, 86, 86)
+                .addComponent(btnUpdate1)
+                .addGap(86, 86, 86)
+                .addComponent(btnDelete1)
+                .addGap(86, 86, 86)
+                .addComponent(btnFind1)
+                .addGap(250, 250, 250))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAdd2)
-                        .addComponent(btnUpdate2)
-                        .addComponent(btnDelete2)
-                        .addComponent(btnFind2))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAdd1)
-                            .addComponent(btnUpdate1)
-                            .addComponent(btnDelete1)
-                            .addComponent(btnFind1))))
-                .addGap(0, 50, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnChon)
+                        .addGap(54, 54, 54)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd1)
+                    .addComponent(btnUpdate1)
+                    .addComponent(btnDelete1)
+                    .addComponent(btnFind1))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    int check = 0;
+    
+    private void loadEmptyTable(int selected) {
+        DefaultTableModel model = (DefaultTableModel) tbAdd.getModel();
+        model.setRowCount(0); // Xóa bảng cũ
+
+        switch (selected) {
+            case 1 -> {
+                model.setColumnIdentifiers(new String[]{"Mã HD", "Ngày Lập", "Mã NV", "Mã DP"});
+                check = 1;
+            }
+            case 2 -> {
+                model.setColumnIdentifiers(new String[]{"Mã HD", "STT", "Nội Dung", "Số Lượng", "Đơn Giá"});
+                check = 2;
+            }
+        }
+
+        // Thêm 1 dòng trống để nhập dữ liệu
+        model.addRow(new Object[model.getColumnCount()]);
+    }
 
     private void loadChiTietHoaDon(String maHD) {
         ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO();
@@ -252,113 +272,211 @@ public class HoaDon_Form extends javax.swing.JFrame {
             });
         }
     }
+    
 
     
     private void tbShowHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbShowHDMouseClicked
         // TODO add your handling code here:        
-        DefaultTableModel modelUpdate = (DefaultTableModel) tbAddHD.getModel();
-        
+        DefaultTableModel modelUpdate = (DefaultTableModel) tbAdd.getModel();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         int row = tbShowHD.getSelectedRow();
         if (row >= 0) {
             String maHD = tbShowHD.getValueAt(row, 0).toString();
             loadChiTietHoaDon(maHD);
             
             modelUpdate.setRowCount(0);
-            modelUpdate.addRow(new Object[]{
-                tbShowHD.getValueAt(row, 0),
-                tbShowHD.getValueAt(row, 1),
-                tbShowHD.getValueAt(row, 2),
-                tbShowHD.getValueAt(row, 3)
-            });
-        }
+            HoaDonDAO dao = new HoaDonDAO();
+            List<HoaDon> list = new ArrayList<>();
+            list.add(dao.findById(maHD));
+
+            for (HoaDon hd : list) {
+                modelUpdate.addRow(new Object[]{
+                    hd.getMaHD(),
+                    sdf.format(hd.getNgayLap()),
+                    hd.getMaNV(),
+                    hd.getMaDP()
+                });
+            }
+        }    
     }//GEN-LAST:event_tbShowHDMouseClicked
 
-    // Bảng 1
     
     private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
         HoaDonDAO HDD = new HoaDonDAO();
+        ChiTietHoaDonDAO CTHDD = new ChiTietHoaDonDAO();
 
-        DefaultTableModel modelAdd = (DefaultTableModel) tbAddHD.getModel();
-        DefaultTableModel modelShow = (DefaultTableModel) tbShowHD.getModel();
+        DefaultTableModel modelAdd = (DefaultTableModel) tbAdd.getModel();
+        DefaultTableModel modelShowHD = (DefaultTableModel) tbShowHD.getModel();
+        DefaultTableModel modelShowCTHD = (DefaultTableModel) tbShowCTHD.getModel();
 
-        String maHD = modelAdd.getValueAt(0, 0).toString();
-        String ngayLapStr = modelAdd.getValueAt(0, 1).toString().trim();
-        String maNV = modelAdd.getValueAt(0, 2).toString();
-        String maDP = modelAdd.getValueAt(0, 3).toString();
-        
-        java.sql.Date ngayLaptmp = java.sql.Date.valueOf(ngayLapStr);
-        //Timestamp ngayLaptmp = Timestamp.valueOf(ngayLapStr + " 00:00:00");
+        switch(check){
+            case 1 -> {
+                String maHD = modelAdd.getValueAt(0, 0).toString();
+                String ngayLapStr = modelAdd.getValueAt(0, 1).toString().trim();
+                String maNV = modelAdd.getValueAt(0, 2).toString();
+                String maDP = modelAdd.getValueAt(0, 3).toString();
 
-        modelShow.addRow(new Object[]{
-            maHD,
-            ngayLaptmp,
-            maNV,
-            maDP
-        });
+                Date ngayLap = Date.valueOf(ngayLapStr);
 
-        HoaDon HD = new HoaDon();
-        HD.setMaHD(maHD);
-        HD.setNgayLap(ngayLaptmp);
-        HD.setMaNV(maNV);
-        HD.setMaDP(maDP);
-        
-        if (HDD.insert(HD)) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Lỗi khi thêm!");
+                modelShowHD.addRow(new Object[]{
+                    maHD,
+                    ngayLapStr,
+                    maNV,
+                    maDP
+                });
+
+                HoaDon HD = new HoaDon();
+                HD.setMaHD(maHD);
+                HD.setNgayLap(ngayLap);
+                HD.setMaNV(maNV);
+                HD.setMaDP(maDP);
+
+                if (HDD.insert(HD)) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Lỗi khi thêm!");
+                }
+            }
+            case 2 -> {
+                String maHD = modelAdd.getValueAt(0, 0).toString();
+                String stt = modelAdd.getValueAt(0, 1).toString();
+                String noiDung = modelAdd.getValueAt(0, 2).toString();
+                String soLuong = modelAdd.getValueAt(0, 3).toString();
+                String donGia = modelAdd.getValueAt(0, 4).toString();
+
+                modelShowCTHD.addRow(new Object[]{
+                    maHD,stt,noiDung,soLuong,donGia});
+
+                ChiTietHoaDon CTHD = new ChiTietHoaDon(maHD,Integer.parseInt(stt),noiDung,Integer.parseInt(soLuong),Double.parseDouble(donGia));
+                
+                if (CTHDD.insert(CTHD)) {
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Lỗi khi thêm!");
+                }
+            }
         }
+
 
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         int row = tbShowHD.getSelectedRow();
-        DefaultTableModel modelShow = (DefaultTableModel) tbShowHD.getModel();
+        HoaDonDAO HDD = new HoaDonDAO();
+        ChiTietHoaDonDAO CTHDD = new ChiTietHoaDonDAO();
+
+        DefaultTableModel modelAdd = (DefaultTableModel) tbAdd.getModel();
+        DefaultTableModel modelShowHD = (DefaultTableModel) tbShowHD.getModel();
+        DefaultTableModel modelShowCTHD = (DefaultTableModel) tbShowCTHD.getModel();
         
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn 1 hóa đơn để sửa.");
-            return;
+        switch(check){
+            case 1 -> {
+                if (row < 0) {
+                    JOptionPane.showMessageDialog(this, "Vui lòng chọn 1 hàng để sửa.");
+                    return;
+                }
+
+                String maHD = modelAdd.getValueAt(0, 0).toString();
+                String ngayLapStr = modelAdd.getValueAt(0, 1).toString();
+                Date ngayLap = Date.valueOf(ngayLapStr); 
+                String maNV = modelAdd.getValueAt(0, 2).toString();
+                String maDP = modelAdd.getValueAt(0, 3).toString();
+
+                modelShowHD.setValueAt(maHD, row, 0);
+                modelShowHD.setValueAt(ngayLapStr, row, 1);
+                modelShowHD.setValueAt(maNV, row, 2);
+                modelShowHD.setValueAt(maDP, row, 3);
+
+                HoaDon hd = new HoaDon(maHD, ngayLap, maNV, maDP);
+
+                if (HDD.update(hd)) {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật!");
+                }
+            }
+            case 2 -> {
+                if (row < 0) {
+                    JOptionPane.showMessageDialog(this, "Vui lòng chọn 1 hàng để sửa.");
+                    return;
+                }
+
+                String maHD = modelAdd.getValueAt(0, 0).toString();
+                String stt = modelAdd.getValueAt(0, 1).toString();
+                String noiDung = modelAdd.getValueAt(0, 2).toString();
+                String soLuong = modelAdd.getValueAt(0, 3).toString();
+                String donGia = modelAdd.getValueAt(0, 4).toString();
+
+                modelShowCTHD.setValueAt(maHD, row, 0);
+                modelShowCTHD.setValueAt(stt, row, 1);
+                modelShowCTHD.setValueAt(noiDung, row, 2);
+                modelShowCTHD.setValueAt(soLuong, row, 3);
+                modelShowCTHD.setValueAt(donGia, row, 4);
+
+                ChiTietHoaDon CTHD = new ChiTietHoaDon(maHD,Integer.parseInt(stt),noiDung,Integer.parseInt(soLuong),Double.parseDouble(donGia));
+
+                if (CTHDD.update(CTHD)) {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật!");
+                }
+            }
         }
         
-        String maHD = tbAddHD.getValueAt(0, 0).toString();
-        
-        java.sql.Date ngayLap;
-        String ngayLapStr = tbAddHD.getValueAt(0, 1).toString();
-        ngayLap = java.sql.Date.valueOf(ngayLapStr); 
 
-        String maNV = tbAddHD.getValueAt(0, 2).toString();
-        String maDP = tbAddHD.getValueAt(0, 3).toString();
-
-        modelShow.addRow(new Object[] {
-            maHD, ngayLap, maNV, maDP
-        });
-        
-        HoaDon hd = new HoaDon(maHD, ngayLap, maNV, maDP);
-        HoaDonDAO dao = new HoaDonDAO();
-
-        if (dao.update(hd)) {
-            JOptionPane.showMessageDialog(this, "Cập nhật hóa đơn thành công!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật!");
-        }
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
-        int row = tbShowHD.getSelectedRow();
+        
+        switch(check){
+            case 1 -> {
+                int row = tbShowHD.getSelectedRow();
 
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Bạn phải chọn dòng để xóa!");
-            return;
+                if (row < 0) {
+                    JOptionPane.showMessageDialog(this, "Bạn phải chọn dòng để xóa!");
+                    return;
+                }
+
+                String maHD = tbShowHD.getValueAt(row, 0).toString();
+
+                HoaDonDAO dao = new HoaDonDAO();
+
+                if (dao.delete(maHD)) {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    DefaultTableModel model = (DefaultTableModel) tbShowHD.getModel();
+                    model.removeRow(row);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+                }
+            }
+            
+            case 2 -> {
+                int row = tbShowCTHD.getSelectedRow();
+
+                if (row < 0) {
+                    JOptionPane.showMessageDialog(this, "Bạn phải chọn dòng để xóa!");
+                    return;
+                }
+
+                String maHD = tbShowCTHD.getValueAt(row, 0).toString();
+                String stt = tbShowCTHD.getValueAt(row, 1).toString();
+                
+                ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO();
+
+                if (dao.delete(maHD, Integer.parseInt(stt))) {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                    DefaultTableModel model = (DefaultTableModel) tbShowCTHD.getModel();
+                    model.removeRow(row);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+                }
+            }
+            
+            default -> {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn bảng muốn xóa!");
+            }
         }
-
-        String maHD = tbShowHD.getValueAt(row, 0).toString();
-
-        HoaDonDAO dao = new HoaDonDAO();
-
-        if (dao.delete(maHD)) {
-            JOptionPane.showMessageDialog(this, "Xóa thành công!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Xóa thất bại!");
-        }
+        
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     private void btnFind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFind1ActionPerformed
@@ -367,7 +485,7 @@ public class HoaDon_Form extends javax.swing.JFrame {
         HoaDonDAO dao = new HoaDonDAO();
         HoaDon hd = dao.findById(maHD);
 
-        DefaultTableModel model = (DefaultTableModel) tbAddHD.getModel();
+        DefaultTableModel model = (DefaultTableModel) tbAdd.getModel();
         model.setRowCount(0);
 
         if (hd != null) {
@@ -382,18 +500,53 @@ public class HoaDon_Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnFind1ActionPerformed
 
-    private void tbAddHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAddHDMouseClicked
+    private void tbAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAddMouseClicked
     
-        int row = tbAddHD.getSelectedRow();
+        int row = tbAdd.getSelectedRow();
         if (row >= 0) {
-            String maHD = tbAddHD.getValueAt(row, 0).toString();
+            String maHD = tbAdd.getValueAt(row, 0).toString();
             loadChiTietHoaDon(maHD);
             
         }
-    }//GEN-LAST:event_tbAddHDMouseClicked
+    }//GEN-LAST:event_tbAddMouseClicked
 
-    
-    // Bảng 2
+    private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
+        JPopupMenu pop = new JPopupMenu();
+
+        JMenuItem m1 = new JMenuItem("Bảng 1: Hóa Đơn");
+        JMenuItem m2 = new JMenuItem("Bảng 2: Chi Tiết Hóa Đơn");
+
+        // Gắn các sự kiện chọn bảng
+        m1.addActionListener(e -> loadEmptyTable(1));
+        m2.addActionListener(e -> loadEmptyTable(2));
+
+        pop.add(m1);
+        pop.add(m2);
+
+        // Hiện popup ngay dưới nút bấm
+        pop.show(btnChon, 0, btnChon.getHeight());
+    }//GEN-LAST:event_btnChonActionPerformed
+
+    private void tbShowCTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbShowCTHDMouseClicked
+        DefaultTableModel modelUpdate = (DefaultTableModel) tbAdd.getModel();
+        
+        int row = tbShowCTHD.getSelectedRow();
+        if (row >= 0) {
+            String maHD = tbShowCTHD.getValueAt(row, 0).toString();
+            loadChiTietHoaDon(maHD);
+            
+            modelUpdate.setRowCount(0);
+            modelUpdate.addRow(new Object[]{
+                tbShowCTHD.getValueAt(row, 0),
+                tbShowCTHD.getValueAt(row, 1),
+                tbShowCTHD.getValueAt(row, 2),
+                tbShowCTHD.getValueAt(row, 3),
+                tbShowCTHD.getValueAt(row, 4)
+            });
+        }
+         
+    }//GEN-LAST:event_tbShowCTHDMouseClicked
+
     
     
     /**
@@ -423,19 +576,17 @@ public class HoaDon_Form extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd1;
-    private javax.swing.JButton btnAdd2;
+    private javax.swing.JButton btnChon;
     private javax.swing.JButton btnDelete1;
-    private javax.swing.JButton btnDelete2;
     private javax.swing.JButton btnFind1;
-    private javax.swing.JButton btnFind2;
     private javax.swing.JButton btnUpdate1;
-    private javax.swing.JButton btnUpdate2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tbAddHD;
+    private javax.swing.JTable tbAdd;
     private javax.swing.JTable tbShowCTHD;
     private javax.swing.JTable tbShowHD;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -10,24 +10,10 @@ package gd_hotel;
  */
 public class GD_HOTEL {
     
-    private static boolean checkSignUp = false;
-        
-    public static boolean getCheck() {
-        return checkSignUp;
-    }
-    public static void setCheck(boolean check) {
-        checkSignUp = check;
-    }
-    
     public static void main(String[] args) {
         
         // gọi HOME_PAGE
         java.awt.EventQueue.invokeLater(() -> new HOME_PAGE().setVisible(true));
-        
-        
-        
-        
-        
-        
+           
     }
 }

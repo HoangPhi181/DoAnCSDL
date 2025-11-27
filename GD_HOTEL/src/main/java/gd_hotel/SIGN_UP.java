@@ -4,6 +4,7 @@
  */
 package gd_hotel;
 
+import com.hotel.database.DatabaseConnectionDangKy;
 import javax.swing.JOptionPane;
 import gd_hotel.GD_HOTEL;
 import java.sql.Connection;
@@ -116,46 +117,16 @@ public class SIGN_UP extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, mgs, "Warning", JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public class User{
-        private String hoTen, soDienThoai, matKhau;
-
-        public String getHoTen() {
-            return hoTen;
-        }
-
-        public void setHoTen(String hoTen) {
-            this.hoTen = hoTen;
-        }
-
-        public String getSoDienThoai() {
-            return soDienThoai;
-        }
-
-        public void setSoDienThoai(String soDienThoai) {
-            this.soDienThoai = soDienThoai;
-        }
-
-        public String getMatKhau() {
-            return matKhau;
-        }
-
-        public void setMatKhau(String matKhau) {
-            this.matKhau = matKhau;
-        }
-        
-        
-    };
     
-    public static User currentUser;
     
-    private void SaveInfoToDataBase(String matKhau, String soDienThoai){ 
-        String sql = "INSERT INTO SaveTT(sdt,mk)" + "VALUES (?, ?)";
-        try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/DangKy?useSSL=false&serverTimezone=UTC","root", "311127"))
+    private void SaveInfoToDataBase(String matKhau, String soDienThoai, String hoTen){ 
+        String sql = "INSERT INTO SaveTT(sdt,mk,userName)" + "VALUES (?, ?, ?)";
+        try (Connection conn = DatabaseConnectionDangKy.getConnection())
         {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, soDienThoai);
-            st.setString(2, matKhau);                
+            st.setString(2, matKhau);       
+            st.setString(3, hoTen);
             st.executeUpdate();
 
             // gọi USER_PAGE
@@ -178,13 +149,7 @@ public class SIGN_UP extends javax.swing.JFrame {
         else if (!soDienThoai.matches("[0-9]+")){warn("Số điện thoại không hợp lệ!");}
         if(matKhau.isEmpty()){warn("Chưa nhập mật khẩu!"); return;}
         
-        SaveInfoToDataBase(matKhau,soDienThoai);
-        
-        User user = new User();
-        user.setHoTen(hoTen);
-        user.setSoDienThoai(soDienThoai);
-        user.setMatKhau(matKhau);
-        currentUser = user;
+        SaveInfoToDataBase(matKhau,soDienThoai,hoTen);
 
         JOptionPane.showMessageDialog(this,
             "Thông tin đăng kí: \n Họ Tên: " + hoTen +
@@ -196,7 +161,7 @@ public class SIGN_UP extends javax.swing.JFrame {
     
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
-        register(); GD_HOTEL.setCheck(true);
+        register();
         
         dispose();
         java.awt.EventQueue.invokeLater(() -> new SIGN_IN().setVisible(true));

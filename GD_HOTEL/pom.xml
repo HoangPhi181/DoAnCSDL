@@ -31,4 +31,5 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>java.gd_hotel.GD_HOTEL</exec.mainClass>
     </properties>
+    <name>GD_HOTEL</name>
 </project>

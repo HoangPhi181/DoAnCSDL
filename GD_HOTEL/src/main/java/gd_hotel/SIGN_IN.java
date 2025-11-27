@@ -4,8 +4,8 @@
  */
 package gd_hotel;
 
+import com.hotel.database.DatabaseConnectionDangKy;
 import javax.swing.JOptionPane;
-import gd_hotel.GD_HOTEL;
 import gd_hotel.SIGN_UP;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,6 +17,7 @@ import java.sql.SQLException;
  *
  * @author HOANG PHI
 **/
+
 public class SIGN_IN extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SIGN_IN.class.getName());
@@ -117,50 +118,57 @@ public class SIGN_IN extends javax.swing.JFrame {
         }
     }
     
- 
-    private void accountUser(String matKhau, String soDienThoai){        
-        SIGN_UP.User user = SIGN_UP.currentUser;
-        
-        if(soDienThoai.equals(user.getSoDienThoai()) && matKhau.equals(user.getMatKhau())){
-            JOptionPane.showMessageDialog(this,"Thành Công!",
-            "Success", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else {
-            JOptionPane.showMessageDialog(this,"Đăng Nhập Không Thành Công!",
-            "Success", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
 
     private void CheckSignUptoSignIn(String matKhau, String soDienThoai){
-        if(GD_HOTEL.getCheck() == true){
-            // tài khoản đã được đăng ký -> đăng nhập và chưa lưu ttcn -- lưu vào DangKy.SQL
-           accountUser(matKhau, soDienThoai);
-           java.awt.EventQueue.invokeLater(() -> new USER_PAGE().setVisible(true));
-        }
-        else {
-            // tài khoản đã đăng ký trước -- đang đăng nhập và đã lưu ttcn -- lưu vào DangKy.SQL
-            String sql = "SELECT * FROM SaveTT";
-            
-            try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/DangKy","root","311127");
-                PreparedStatement st = conn.prepareStatement(sql);
-                ResultSet rs = st.executeQuery();
-                while(rs.next()){
-                    if(rs.getString("sdt").equals(soDienThoai) && rs.getString("mk").equals(matKhau) ){
-                            // gọi USER_PAGE
-                            java.awt.EventQueue.invokeLater(() -> new USER_PAGE().setVisible(true));
-                            return;
-                    };
-                }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this,"Đăng Nhập Không Thành Công!","Suscess", JOptionPane.INFORMATION_MESSAGE);
+        
+        String sql = "SELECT * FROM SaveTT";
+
+        try {
+            Connection conn = DatabaseConnectionDangKy.getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                if(rs.getString("sdt").equals(soDienThoai) && rs.getString("mk").equals(matKhau) ){
+                        // gọi USER_PAGE
+                        java.awt.EventQueue.invokeLater(() -> new USER_PAGE().setVisible(true));
+                        return;
+                };
             }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,"Đăng Nhập Không Thành Công!","Suscess", JOptionPane.INFORMATION_MESSAGE);
         }
+       
+    }
+    
+    public static class UserSI {
+        public static UserSI currentUser;
+        
+        private String sdt, mk;
+
+        public String getSdt() {
+            return sdt;
+        }
+
+        public void setSdt(String sdt) {
+            this.sdt = sdt;
+        }
+
+        public String getMk() {
+            return mk;
+        }
+
+        public void setMk(String mk) {
+            this.mk = mk;
+        }
+        
     }
     
     private void SignIn(){
         String matKhau = txtMK.getText().trim();
         String soDienThoai = txtSDT.getText().trim();
+        UserSI usSI = new UserSI();
+        usSI.setSdt(soDienThoai); usSI.setMk(matKhau);
+        UserSI.currentUser = usSI;
         
         if(soDienThoai.isEmpty()){warn("Chưa nhập số điện thoại!"); return;}
         else if (!soDienThoai.matches("[0-9]+")){warn("Số điện thoại không hợp lệ!");return;}
@@ -169,7 +177,6 @@ public class SIGN_IN extends javax.swing.JFrame {
         accountManager(matKhau, soDienThoai);
         if(checkM == true){
             dispose();
-            // gọi QLKhachHang
             java.awt.EventQueue.invokeLater(() -> new MANAGER_PAGE().setVisible(true));
             return;
         }

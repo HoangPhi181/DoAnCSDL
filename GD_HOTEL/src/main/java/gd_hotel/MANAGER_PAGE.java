@@ -4,7 +4,9 @@
  */
 package gd_hotel;
 
+import gd_hotel.QLKS.TT_KHACHHANG;
 import gd_hotel.QLKS.DatPhong_Form;
+import gd_hotel.QLKS.DichVu_Form;
 import gd_hotel.QLKS.HoaDon_Form;
 import gd_hotel.QLKS.NhanVien_Form;
 import javax.swing.JMenuItem;
@@ -33,6 +35,7 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
         JMenuItem item4 = new JMenuItem("Hóa Đơn");
         JMenuItem item5 = new JMenuItem("Thống Kê Doanh Thu");
         JMenuItem item6 = new JMenuItem("Đặt Phòng");
+        JMenuItem item7 = new JMenuItem("Dịch Vụ");
         JMenuItem itemOut = new JMenuItem("Đăng Xuất");
         
         popupManager.add(item1);
@@ -41,6 +44,7 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
         popupManager.add(item4);
         popupManager.add(item5);
         popupManager.add(item6);
+        popupManager.add(item7);
         popupManager.add(itemOut);
         
         item1.addActionListener(e -> {
@@ -71,6 +75,11 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
         item6.addActionListener(e ->{
             dispose();
             new DatPhong_Form().setVisible(true);
+        });
+        
+        item7.addActionListener(e ->{
+            dispose();
+            new DichVu_Form().setVisible(true);
         });
         
         itemOut.addActionListener(e -> {

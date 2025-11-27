@@ -8,6 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import gd_hotel.GD_HOTEL;
+import java.sql.SQLException;
 
 /**
  *
@@ -34,7 +35,13 @@ public class USER_PAGE extends javax.swing.JFrame {
         popupUser.add(itemOut);
         
         item1.addActionListener(e -> {
-            java.awt.EventQueue.invokeLater(() -> new ThongTinCaNhan().setVisible(true));
+            java.awt.EventQueue.invokeLater(() -> {
+                try {
+                    new ThongTinCaNhan().setVisible(true);
+                } catch (SQLException ex) {
+                    System.getLogger(USER_PAGE.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
+            });
         });
         
         item2.addActionListener(e -> {
@@ -48,7 +55,6 @@ public class USER_PAGE extends javax.swing.JFrame {
                 "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(this, "Đã đăng xuất!");
-                GD_HOTEL.setCheck(false);
                 dispose(); // hoặc chuyển về màn hình đăng nhập
                 java.awt.EventQueue.invokeLater(() -> new HOME_PAGE().setVisible(true));
             }

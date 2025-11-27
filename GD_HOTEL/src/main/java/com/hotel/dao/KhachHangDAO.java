@@ -31,6 +31,17 @@ public class KhachHangDAO {
         } catch (Exception e) { e.printStackTrace(); }
         return null;
     }
+    
+    public KhachHang findByUser(String soDienThoai) {
+        String sql = "SELECT * FROM KhachHang WHERE SDT = ?";
+        try (Connection c = DatabaseConnection.getConnection();
+            PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, soDienThoai);
+            try (ResultSet rs = ps.executeQuery()) { if (rs.next()) return mapRow(rs); }
+        } catch (Exception e) { e.printStackTrace(); }
+        return null;
+    }
+
 
     public boolean insert(KhachHang k) {
         String sql = "INSERT INTO KhachHang(MaKH,Ho,TenLot,Ten,CCCD,SDT,NamSinh,DiaChi,GioiTinh) VALUES(?,?,?,?,?,?,?,?,?)";

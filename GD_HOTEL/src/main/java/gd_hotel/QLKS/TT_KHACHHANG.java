@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package gd_hotel;
+package gd_hotel.QLKS;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import com.hotel.database.DatabaseConnection;
 import com.hotel.dao.KhachHangDAO;
 import com.hotel.model.KhachHang;
+import gd_hotel.MANAGER_PAGE;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
