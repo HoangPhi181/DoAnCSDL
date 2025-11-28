@@ -34,13 +34,27 @@ public class KhachHangDAO {
     
     public KhachHang findByUser(String soDienThoai) {
         String sql = "SELECT * FROM KhachHang WHERE SDT = ?";
+        System.out.println("Tìm SDT: " + soDienThoai);
+
         try (Connection c = DatabaseConnection.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setString(1, soDienThoai);
-            try (ResultSet rs = ps.executeQuery()) { if (rs.next()) return mapRow(rs); }
-        } catch (Exception e) { e.printStackTrace(); }
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, soDienThoai.trim());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Tìm thấy KH!");
+                    return mapRow(rs);
+                } else {
+                    System.out.println("KH không tồn tại trong DB!");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
 
 
     public boolean insert(KhachHang k) {

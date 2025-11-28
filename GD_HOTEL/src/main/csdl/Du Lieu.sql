@@ -45,7 +45,7 @@ INSERT INTO DichVu (MaDV, TenDV, GiaDV, MoTa) VALUES
 ('DV10', 'MiniBar - Nước suối', 20000, 'Chai 500ml');
 
 -- =============================================
--- 3. NHÂN VIÊN (2)
+-- 3. NHÂN VIÊN 
 -- =============================================
 INSERT INTO NhanVien (MaNV, Ho, TenLot, Ten, ChucVu, SDT) VALUES
 ('NV01', 'Nguyễn', 'Thị', 'Mai', 'Lễ tân trưởng', '0901111222'),
@@ -60,7 +60,7 @@ INSERT INTO NhanVien (MaNV, Ho, TenLot, Ten, ChucVu, SDT) VALUES
 ('NV10', 'Ngô', 'Văn', 'Quyền', 'Bếp trưởng', '0910000111');
 
 -- =============================================
--- 4. KHÁCH HÀNG (1)
+-- 4. KHÁCH HÀNG 
 -- =============================================
 INSERT INTO KhachHang (MaKH, Ho, TenLot, Ten, CCCD, SDT, NamSinh, DiaChi, GioiTinh) VALUES
 ('KH01', 'Lý', 'Hải', 'Đăng', '001090000001', '0911111111', 1990, 'Quận 1, TPHCM', 'Nam'),
@@ -97,7 +97,7 @@ INSERT INTO Phong (MaPhong, SoPhong, Tang, TrangThai, MaLP, MaNVQL) VALUES
 ('P204', '204', 2, 'Đang ở', 'LP03', 'NV09');
 
 -- =============================================
--- 6. ĐẶT PHÒNG (3)
+-- 6. ĐẶT PHÒNG 
 -- =============================================
 INSERT INTO DatPhong (MaDP, MaKH, MaNV, NgayDat, NgayNhan, NgayTra, TrangThai) VALUES
 ('DP01', 'KH01', 'NV01', '2025-10-01', '2025-10-05', '2025-10-07', 'Đã trả phòng'),
@@ -112,7 +112,7 @@ INSERT INTO DatPhong (MaDP, MaKH, MaNV, NgayDat, NgayNhan, NgayTra, TrangThai) V
 ('DP10', 'KH08', 'NV07', '2025-11-21', '2025-12-10', '2025-12-12', 'Đã xác nhận');
 
 -- =============================================
--- 7. CHI TIẾT ĐẶT PHÒNG (3)
+-- 7. CHI TIẾT ĐẶT PHÒNG 
 -- =============================================
 INSERT INTO ChiTietDatPhong (MaDP, MaP, GiaDP) VALUES
 ('DP01', 'P101', 400000),
@@ -191,3 +191,4 @@ INSERT INTO ChiTietHoaDon (MaHD, SoThuTu, NoiDung, SoLuong, DonGia) VALUES
 ('HD03', 1, 'Tiền phòng P102 (2 đêm)', 2, 400000),
 ('HD03', 2, 'MiniBar - Bia', 2, 40000);
 
+select * from KHACHHANG;

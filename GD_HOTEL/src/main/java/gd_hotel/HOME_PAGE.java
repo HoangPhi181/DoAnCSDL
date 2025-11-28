@@ -4,6 +4,9 @@
  */
 package gd_hotel;
 
+import gd_hotel.QLSignUp_SignIn.SIGN_IN;
+import gd_hotel.QLSignUp_SignIn.SIGN_UP;
+ 
 /**
  *
  * @author HOANG PHI
@@ -17,6 +20,7 @@ public class HOME_PAGE extends javax.swing.JFrame {
      */
     public HOME_PAGE() {
         initComponents();
+
     }
 
     /**
@@ -30,10 +34,10 @@ public class HOME_PAGE extends javax.swing.JFrame {
 
         btnSignIn = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        cbbDiaDiem = new javax.swing.JComboBox<>();
-        btnTimKiem = new javax.swing.JButton();
-        cbbLoaiPhong = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +52,7 @@ public class HOME_PAGE extends javax.swing.JFrame {
                 btnSignInActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, -1, -1));
+        getContentPane().add(btnSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, -1, -1));
 
         btnSignUp.setBackground(new java.awt.Color(153, 153, 153));
         btnSignUp.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -59,64 +63,35 @@ public class HOME_PAGE extends javax.swing.JFrame {
                 btnSignUpActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, -1, -1));
+        getContentPane().add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 20, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 0));
+        jLabel2.setFont(new java.awt.Font("Ravie", 0, 64)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("ABC HOTEL ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 630, 120));
 
-        cbbDiaDiem.setBackground(new java.awt.Color(204, 204, 204));
-        cbbDiaDiem.setEditable(true);
-        cbbDiaDiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbbDiaDiem.setForeground(new java.awt.Color(0, 0, 0));
-        cbbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Địa Điểm", "TP HCM", "Hà Nội", "Nha Trang" }));
-        cbbDiaDiem.setToolTipText("");
-        cbbDiaDiem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbbDiaDiemActionPerformed(evt);
-            }
-        });
+        jLabel3.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 204, 102));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("MODERN JAPANESE CHAIR");
+        jLabel3.setToolTipText("");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 450, -1));
 
-        btnTimKiem.setBackground(new java.awt.Color(0, 153, 255));
-        btnTimKiem.setFont(new java.awt.Font("Segoe UI Black", 1, 13)); // NOI18N
-        btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/16x16-free-application-icons/16x16-free-application-icons/png/16x16/View.png"))); // NOI18N
-        btnTimKiem.setText("Tìm");
+        jLabel4.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("www.abchotel.com");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 520, 370, -1));
 
-        cbbLoaiPhong.setBackground(new java.awt.Color(204, 204, 204));
-        cbbLoaiPhong.setEditable(true);
-        cbbLoaiPhong.setForeground(new java.awt.Color(0, 0, 0));
-        cbbLoaiPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Loại Phòng", "Phòng 2 GN", "Phòng 1 GN" }));
+        jLabel5.setText("____________________");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 490, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(cbbDiaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbbLoaiPhong, 0, 189, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTimKiem))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbbDiaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem)
-                    .addComponent(cbbLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 430, 30));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/ABC HOTEL (2).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/Home.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbbDiaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbDiaDiemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbbDiaDiemActionPerformed
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         // TODO add your handling code here:
@@ -158,10 +133,10 @@ public class HOME_PAGE extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSignIn;
     private javax.swing.JButton btnSignUp;
-    private javax.swing.JButton btnTimKiem;
-    private javax.swing.JComboBox<String> cbbDiaDiem;
-    private javax.swing.JComboBox<String> cbbLoaiPhong;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

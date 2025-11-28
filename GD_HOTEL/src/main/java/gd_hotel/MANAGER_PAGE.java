@@ -9,6 +9,7 @@ import gd_hotel.QLKS.DatPhong_Form;
 import gd_hotel.QLKS.DichVu_Form;
 import gd_hotel.QLKS.HoaDon_Form;
 import gd_hotel.QLKS.NhanVien_Form;
+import gd_hotel.QLKS.ThongKeDT_Form;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -26,6 +27,7 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
      */
     public MANAGER_PAGE() {
         initComponents();
+        jPanel2.setOpaque(false);
         
         popupManager = new JPopupMenu();
         
@@ -33,7 +35,7 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
         JMenuItem item2 = new JMenuItem("Thông Tin Khách Hàng");
         JMenuItem item3 = new JMenuItem("Thông Tin Nhân Viên");
         JMenuItem item4 = new JMenuItem("Hóa Đơn");
-        JMenuItem item5 = new JMenuItem("Thống Kê Doanh Thu");
+        JMenuItem itemThongKe = new JMenuItem("Thống Kê Doanh Thu");
         JMenuItem item6 = new JMenuItem("Đặt Phòng");
         JMenuItem item7 = new JMenuItem("Dịch Vụ");
         JMenuItem itemOut = new JMenuItem("Đăng Xuất");
@@ -42,9 +44,9 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
         popupManager.add(item2);
         popupManager.add(item3);
         popupManager.add(item4);
-        popupManager.add(item5);
         popupManager.add(item6);
         popupManager.add(item7);
+        popupManager.add(itemThongKe);
         popupManager.add(itemOut);
         
         item1.addActionListener(e -> {
@@ -67,9 +69,9 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
             java.awt.EventQueue.invokeLater(() -> new HoaDon_Form().setVisible(true));
         });
         
-        item5.addActionListener(e -> {
+        itemThongKe.addActionListener(e -> {
             dispose();
-            java.awt.EventQueue.invokeLater(() -> new THONGKE_FORM().setVisible(true));
+            java.awt.EventQueue.invokeLater(() -> new ThongKeDT_Form().setVisible(true));
         });
         
         item6.addActionListener(e ->{
@@ -105,6 +107,15 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
 
         popupManager = new javax.swing.JPopupMenu();
         btnManager = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,9 +131,86 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
                 btnManagerActionPerformed(evt);
             }
         });
-        getContentPane().add(btnManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, -1, -1));
+        getContentPane().add(btnManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/ABC HOTEL (2).png"))); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Serif", 0, 28)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel3.setText("MODERN JAPANESE CHAIR");
+        jLabel3.setToolTipText("");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("Phone");
+
+        jLabel15.setFont(new java.awt.Font("Serif", 2, 15)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("0245-228-558");
+
+        jLabel10.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel10.setText("Email");
+
+        jLabel11.setFont(new java.awt.Font("Serif", 2, 15)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("www.abchotel.com");
+
+        jLabel7.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setText("Website");
+
+        jLabel6.setFont(new java.awt.Font("Serif", 2, 15)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("www.abchotel.com");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(162, 162, 162)
+                .addComponent(jLabel6)
+                .addGap(72, 72, 72))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel15))
+                .addGap(20, 20, 20))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 570, 730, 90));
+
+        jLabel8.setFont(new java.awt.Font("Ravie", 0, 64)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("ABC HOTEL");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 470, 90));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/ManagerPage.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -160,7 +248,16 @@ public class MANAGER_PAGE extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManager;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu popupManager;
     // End of variables declaration//GEN-END:variables
 }
