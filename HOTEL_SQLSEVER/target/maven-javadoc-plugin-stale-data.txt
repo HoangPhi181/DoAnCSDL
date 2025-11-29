@@ -1,0 +1,46 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+--no-fonts
+-classpath
+'C:/Users/HOANG PHI/.m2/repository/org/netbeans/external/AbsoluteLayout/RELEASE260/AbsoluteLayout-RELEASE260.jar'
+-encoding
+'UTF-8'
+-protected
+--release
+24
+-sourcepath
+'D:/PROGRAM LANGUAGE/Java/GD_HOTEL/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/PROGRAM LANGUAGE/Java/GD_HOTEL/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'GD_HOTEL 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'GD_HOTEL 1.0-SNAPSHOT API'
+gd_hotel
+C:\Users\HOANG PHI\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE260\AbsoluteLayout-RELEASE260.jar = 1762952779977
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\src\main\java = 1762952410890
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\allclasses-index.html = 1762970390295
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\allpackages-index.html = 1762970390300
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\element-list = 1762970390181
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\help-doc.html = 1762970390327
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\index-all.html = 1762970390315
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\index.html = 1762970390322
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\member-search-index.js = 1762970390304
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\module-search-index.js = 1762970390301
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\overview-tree.html = 1762970390278
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\package-search-index.js = 1762970390302
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\search.html = 1762970390318
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\serialized-form.html = 1762970390250
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\tag-search-index.js = 1762970390305
+D:\PROGRAM LANGUAGE\Java\GD_HOTEL\target\reports\apidocs\type-search-index.js = 1762970390303

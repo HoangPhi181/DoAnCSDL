@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"gd_hotel","l":"GD_HOTEL"},{"p":"gd_hotel","l":"HOME_PAGE"},{"p":"gd_hotel","l":"SIGN_IN"},{"p":"gd_hotel","l":"SIGN_UP"}];updateSearchResults();
